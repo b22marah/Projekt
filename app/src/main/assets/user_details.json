@@ -1,0 +1,61 @@
+[
+  {
+    "ID":"Mythical1",
+    "name":"Phoenix",
+    "type":"b22marah",
+    "company":"Fire",
+    "location":"Resurrection",
+    "category":"Firebird",
+    "size":0,
+    "cost":0,
+    "auxdata":""
+  },
+
+  {
+    "ID":"Mythical2",
+    "name":"Griffin",
+    "type":"b22marah",
+    "company":"Air",
+    "location":"Flight",
+    "category":"Chimera",
+    "size":0,
+    "cost":0,
+    "auxdata":""
+  },
+
+  {
+    "ID":"Mythical3",
+    "name":"Nymph",
+    "type":"b22marah",
+    "company":"Water",
+    "location":"Nature Manipulation",
+    "category":"Nature Spirit",
+    "size":0,
+    "cost":0,
+    "auxdata":""
+  },
+
+  {
+    "ID":"Mythical4",
+    "name":"Centaur",
+    "type":"b22marah",
+    "company":"Earth",
+    "location":"Archery",
+    "category":"Hybrid",
+    "size":0,
+    "cost":0,
+    "auxdata":""
+  },
+
+  {
+    "ID":"Mythical5",
+    "name":"Dragon",
+    "type":"b22marah",
+    "company":"Fire",
+    "location":"Fire breath",
+    "category":"Mythological reptile",
+    "size":0,
+    "cost":0,
+    "auxdata":""
+  }
+]
