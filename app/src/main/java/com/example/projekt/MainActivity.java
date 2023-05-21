@@ -1,8 +1,10 @@
 package com.example.projekt;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,5 +61,9 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         listOfCreatures.addAll(data);
 
         adapter.notifyDataSetChanged();
+    }
+    public void goToAboutPage(View view) {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 }
