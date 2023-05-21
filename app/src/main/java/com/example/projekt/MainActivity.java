@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=b22marah";
-    private final String JSON_FILE = "mountains.json";
+    private final String JSON_FILE = "user_details.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
