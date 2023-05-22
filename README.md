@@ -134,7 +134,7 @@ the written text that's already provided inside the TextViews themselves.
 
 ```
 
-### 8: Fetching and presenting the API-data from (MainActivity):
+### 8: Fetching and presenting the API-data:
 
 
 
