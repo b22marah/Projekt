@@ -98,6 +98,50 @@ the written text that's already provided inside the TextViews themselves.
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
+### 4: Defining the MythicalCreatures object:
+
+
+
+#### Code-snippet (4):
+```
+
+```
+
+### 5: Creating MyViewHolder:
+
+
+
+#### Code-snippet (5):
+```
+
+```
+
+### 6: Creating MyAdapter:
+
+
+
+#### Code-snippet (6):
+```
+
+```
+
+### 7: Creating my Intent:
+
+
+
+#### Code-snippet (7):
+```
+
+```
+
+### 8: Fetching and presenting the API-data from (MainActivity):
+
+
+
+#### Code-snippet (8):
+```
+
+```
 
 
 # Pictures and Videos of the Application:
