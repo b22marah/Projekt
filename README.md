@@ -16,10 +16,4 @@ Projekt-Assignment
 ![](Screenshot_20230522_131028.png)
 
 ### Application demonstration video:
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true">
-    <source src="device-2023-05-22-132309.webm" type="video/webm">
-  </video>
-</figure>
-
-![](device-2023-05-22-132309.webm)
+![](videopresentation.gif)
