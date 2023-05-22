@@ -2,9 +2,21 @@
 
 ### 1: Creating recyclerView:
 
+
+
+
 ### 2: Creating Items for the recyclerView:
 
+
+
+
 ### 3: Creating About-page:
+
+
+
+´´´
+<div></div>>
+´´´
 
 
 # Pictures and Videos of the Application:
