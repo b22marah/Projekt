@@ -18,8 +18,8 @@ Projekt-Assignment
 ### Application demonstration video:
 <figure class="video_container">
   <video controls="true" allowfullscreen="true">
-    <source src="device-2023-05-22-130034.webm" type="video/webm">
+    <source src="device-2023-05-22-132309.webm" type="video/webm">
   </video>
 </figure>
 
-![](device-2023-05-22-130034.webm)
+![](device-2023-05-22-132309.webm)
