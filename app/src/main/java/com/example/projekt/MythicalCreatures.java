@@ -20,7 +20,7 @@ public class MythicalCreatures {
 
     @Override
     public String toString() {
-        String presentCreatures = "Creature: " + ID + "\nName: " + name + "\nElement: " + company + "\nPower: " + location + "\nCategory: " + category + "\nCreater " + type;
+        String presentCreatures = "Creature: " + ID + "\nName: " + name + "\nElement: " + company + "\nPower: " + location + "\nCategory: " + category + "\nCreater: " + type;
         return presentCreatures;
     }
 }
