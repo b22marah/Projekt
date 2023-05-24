@@ -199,14 +199,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 ### 7: Creating my Intent:
 
-7.1 For my intent i created a method inside "MainActivity" that's called "goToAboutPage(View View)". A Intent is used to navigate between different sections / components of the Android application, in this case, for activities.
+7.1: For my intent i created a method inside "MainActivity" that's called "goToAboutPage(View View)". A Intent is used to navigate between different sections / components of the Android application, in this case, for activities.
 So for the functionality inside the method. We first start of by creating an Intent object with the name "intent", then we use the "new Intent" constructor with two parameters "this", and "AboutActivity.class".
 What this does is that it defines that this context ("this") is used to navigate to the second parameter, which in our case is "AboutActivity.class". The second parameter is the class that's responsible / representing
 the data we want to navigate to, using our Intent.
 When all this is done, our method calls on the method "startActivity(intent)". By reading the method name we can see that this method is used to start a activity when it's called, and as a parameter we have sent
 our newly created Intent, which we know wants to navigate to our "AboutActivity"-class, which in this case will open our "activity_about.xml" where we have our data for the "About-page".
 
-7.2 This activity "activity_about.xml" is later closed (when done reading) with a use of a method called "closeAboutPage(View View)" which can be found inside "AboutActivity".
+7.2: This activity "activity_about.xml" is later closed (when done reading) with a use of a method called "closeAboutPage(View View)" which can be found inside "AboutActivity".
 This method is a super easy method that calls on a predefined method inside Android studios called "finish()", which does what the name suggests, it finishes the active activity, which in our case 
 will return us to the "activity_main.xml" / landing-page.
 
@@ -228,13 +228,83 @@ public void closeAboutPage(View view) {
 
 ### 8: Fetching and presenting the API-data:
 
+8.1: From "MainActivity" is where we fetch our data through an API as well as defining sections of the data, 
+where we can later further use and manipulate the given data in different classes, such as we recently described in earlier points ( < 8).
 
+The first thing we do in "MainActivity" after starting the class, is that we fetch the data we are going to use, using our custom API created and provided by the teachers of this course.
+Along this we also create a final String called JSON_FILE, where we fetch data from a assets folder i've created for the project, this assets folder holds a copy of the data that is inside the API
+we are using. This assets folder is never used in the program though, instead i've used it to see what data i have avaible to work with, and if my API for some reason wouldn't work, i could use the 
+JSON_File instead to get the same results.
+Here we also declared variables with the corresponding types likes a RecyclerView named "recyclerview", Myadapter named "adapter" and so on...
 
-#### Code-snippet:  (8):
+#### Code-snippet: Declarations and retrieving data from API (8.1):
+```
+    private final String JSON_URL = "https://mobprog.webug.se/json-api?login=b22marah";
+    private final String JSON_FILE = "user_details.json";
+    private RecyclerView recyclerView;
+    private ArrayList<MythicalCreatures> listOfCreatures;
+    private MyAdapter adapter;
 ```
 
+8.2: Then we have the method "onCreate()". The code inside this method is what's going to be executed the first thing when the application is first started.
+Inside this method we are setting the layout of "activity_main.xml" using the following line of code: "setContentView(R.Layout.activity_main)".
+Afterwards, the method is creating a new instance of JsonTask (a class provided by our teacher, responsible for fetching and to handle the Json data) and executes 
+it with the provided URL inside "JSON_URL"
+
+When this is done, the method finds our recyclerview by an ID search "findViewById(R.id.recyclerview)", then it also initialize "listOfCreatures" as a new (empty) arrayList
+holding "MythicalCreatures". Then a new instance of "MyAdapter" is created and called "adapter", again with "listOfCreatures". And lastly th method sets a layout manager of our RecyclerView
+to a "LinearLayoutManager" and then sets this adapter to our "RecyclerView".
+
+To summarize this method is used upon starting the application, it's used to fetch and handle the provided Json-data from our API. With this it also sets the layout to present 
+as well as defining / creating instances of objects we later are going to work with in different classes.
+
+#### Code-snippet: onCreate (MainActivity) (8.2):
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    new JsonTask(this).execute(JSON_URL);
+    RecyclerView view = findViewById(R.id.recyclerview);
+    listOfCreatures = new ArrayList<MythicalCreatures>();
+    adapter = new MyAdapter(listOfCreatures);
+    view.setLayoutManager(new LinearLayoutManager(this));
+    view.setAdapter(adapter);
+}
 ```
 
+8.3: The "onPostExecute" method is first used after the "onCreate" method has been executed. What happens inside this method is that a new instance of an external library 
+"Gson" is created and stored
+in a variable named "Gson" with the type of 'Gson'. After this a new "TypeToken" is defined to tell the method what type of data is being deserialize.
+
+What this first section does, and what i mean with "deserialize", is the process of the Gson library, which is converting our JSON-data to Java-objects, 
+which we can use inside our ArrayList, without
+this we wouldn't be able to handle the JSON-data in our ArrayList.
+
+Anyhow, after this we are putting our converted Java-objects (before it was JASON-data) inside our "ArrayList<MythicalCreatures>", and afterwards we add 
+ALL our data from this process inside "listOfCreatures".
+
+Then we finish the method by calling on a predefined method called ".notifyDataSetChanged()" that's called on our adapter like this "adapter.notifyDataSetChanged();".
+What this method does is that it notifies our adapter that the data has changed, and must be updated.
+
+So to summarize this method, it's used to convert our fetched JSON-data to Java-object that we can use and manipulate, since we cannot to it with the original JASON-data.
+After this we are putting the newly converted data we fetched inside our ArrayList, and we are adding all available data inside our "ListOfCreatures" object. And we finish the method
+by letting our adapter know there has been a change in the data, and it must be updated / fetched once again, to get the "right" data available.
+
+#### Code-snippet: onPostExecute (MainActivity) (8.3):
+```
+@Override
+public void onPostExecute(String json) {
+    Log.d("MainActivity", json);
+
+    Gson gson = new Gson();
+    Type type = new TypeToken<ArrayList<MythicalCreatures>>() {}.getType();
+    ArrayList<MythicalCreatures> data = gson.fromJson(json, type);
+    listOfCreatures.addAll(data);
+
+    adapter.notifyDataSetChanged();
+}
+```
 
 # Pictures and Videos of the Application:
 ## Start screen / landing page Screenshot:
