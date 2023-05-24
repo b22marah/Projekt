@@ -156,13 +156,16 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 What this class does is that it works like a bridge / adapter between the data im retrieving (list of MythicalCreatures) and the RecyclerView. It is basically a class that takes in parameters to connect 
 the data to where it's supposed to be represented, in this case, the data from the API which is found inside my list of MythicalCreatures, and then displays this inside my RecyclerView as individual items.
 
-    6.1: When the class first "starts" it takes a parameter "RecyclerView.Adapter<MyViewHolder>", this will be the data that we want to display inside our RecyclerView.
-    6.2: Inside the "onCreateViewHolder()"-method, the code inflates the layout of "activity_second" and return a MyViewHolder object, which in our case can be described as
-         a method thats inflating the TextView from activity_second with a instance of MyViewHolder, which is what we are using to display every Item from our API seperatly.
-    6.3: Inside the "onBindViewHolder" method, we are binding the data for each Item inside the RecyclerView. Which also means that the data thats inflated in the latest step (6.2),
-         now is getting overridden to display the corresponding data inside the TextView, which is later placed inside the RecyclerView as an item, following the formatted string we created earlier
-         with the "toString" method.
-    6.4: Lastely we have the method "getItemCount()" which is used to return how many Items that exists inside the list of creatures, so with that said, this method is whats used to determine the size of our RecyclerView.
+6.1: When the class first "starts" it takes a parameter "RecyclerView.Adapter<MyViewHolder>", this will be the data that we want to display inside our RecyclerView.
+
+6.2: Inside the "onCreateViewHolder()"-method, the code inflates the layout of "activity_second" and return a MyViewHolder object, which in our case can be described as
+a method that's inflating the TextView from activity_second with a instance of MyViewHolder, which is what we are using to display every Item from our API separately.
+
+6.3: Inside the "onBindViewHolder" method, we are binding the data for each Item inside the RecyclerView. Which also means that the data that's inflated in the latest step (6.2),
+now is getting overridden to display the corresponding data inside the TextView, which is later placed inside the RecyclerView as an item, following the formatted string we created earlier
+with the "toString" method.
+
+6.4: Lastly we have the method "getItemCount()" which is used to return how many Items that exists inside the list of creatures, so with that said, this method is whats used to determine the size of our RecyclerView.
 
 Overall, all these methods focuses on different parts of the code, to handle the retrieved data to then apply and present the retentive data for the users. The method which has been explained
 focuses on different key-points to make this hole process possible, and together does what the classname suggest, which is working as a adapter / bridge between the retrieving of the data, and the presenting of the data.
