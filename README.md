@@ -311,7 +311,7 @@ public void onPostExecute(String json) {
 ![](Screenshot_20230522_130956.png)
 
 ## About page Screenshot:
-![](Screenshot_20230522_131028.png)
+![img_2.png](img_2.png)
 
 ## Application demonstration video:
 ![](videopresentation.gif)
