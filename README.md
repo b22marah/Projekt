@@ -199,15 +199,32 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 ### 7: Creating my Intent:
 
+7.1 For my intent i created a method inside "MainActivity" that's called "goToAboutPage(View View)". A Intent is used to navigate between different sections / components of the Android application, in this case, for activities.
+So for the functionality inside the method. We first start of by creating an Intent object with the name "intent", then we use the "new Intent" constructor with two parameters "this", and "AboutActivity.class".
+What this does is that it defines that this context ("this") is used to navigate to the second parameter, which in our case is "AboutActivity.class". The second parameter is the class that's responsible / representing
+the data we want to navigate to, using our Intent.
+When all this is done, our method calls on the method "startActivity(intent)". By reading the method name we can see that this method is used to start a activity when it's called, and as a parameter we have sent
+our newly created Intent, which we know wants to navigate to our "AboutActivity"-class, which in this case will open our "activity_about.xml" where we have our data for the "About-page".
 
+7.2 This activity "activity_about.xml" is later closed (when done reading) with a use of a method called "closeAboutPage(View View)" which can be found inside "AboutActivity".
+This method is a super easy method that calls on a predefined method inside Android studios called "finish()", which does what the name suggests, it finishes the active activity, which in our case 
+will return us to the "activity_main.xml" / landing-page.
 
-#### Code-snippet: Creating the Intent (7):
+#### Code-snippet: Creating the Intent (7.1):
 ```
 public void goToAboutPage(View view) {
     Intent intent = new Intent(this, AboutActivity.class);
     startActivity(intent);
 }
 ```
+
+#### Code-snippet: Closing the "Intent" / About-page (7.2):
+```
+public void closeAboutPage(View view) {
+    finish();
+}
+```
+
 
 ### 8: Fetching and presenting the API-data:
 
