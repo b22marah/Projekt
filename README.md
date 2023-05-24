@@ -5,7 +5,7 @@ The first thing i did for the project was to create / change my "activity_main" 
 to inform / teach it's users about this subject. For this i needed a recyclerView, which is where all by Items will be listed and displayed as a list on the same page. With this i also created
 a button, the button is supposed to be a toggle between the about-page and the landing-page / recyclerView, where all the Json-data is presented.
 
-#### Code-snippet of recyclerView(1):
+#### Code-snippet: recyclerView (1):
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,7 +33,7 @@ a button, the button is supposed to be a toggle between the about-page and the l
 After creating my recyclerView, i started a new activity, "activity_second" which is where the Items for the recyclerView is created. Inside this XML-file, i've included a TextView, which is
 where all the data actually will be presented. After all the Items are stored in each separate TextView, it's then displayed as an item inside our recyclerView, which we earlier talked about.
 
-#### Code-snippet TextView (2):
+#### Code-snippet: TextView (2):
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -61,7 +61,7 @@ And lastly, for the last and final activity, "activity_about.xml" we have create
 recycler-page. And for the two TextViews we have a header-view as well as the informative text for the application. The text here is hardcoded, so there are no external / internal links here, only
 the written text that's already provided inside the TextViews themselves.
 
-#### Code-snippet About-page(3):
+#### Code-snippet: About-page (3):
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -100,45 +100,117 @@ the written text that's already provided inside the TextViews themselves.
 
 ### 4: Defining the MythicalCreatures object:
 
+First of all a new class was created called "MythicalCreatures", this class is what actually is called on to present the mythical creatures in the specific format
+that's shown in the Code-snippet below. This class has a constructor which takes in parameters for all the properties and inside the class we are assigning the corresponding
+data to different variables. By doing this, we can create instances of the class with specific data for each corresponding variable.
+Then we have a method called "toString", which will be the method called upon to retrieve and present the data on a recyclerView later. In this method 
+we are creating a string called "presentCreatures", which creates the structure of the presentation of each creature Item, this string is using all the variables earlier created
+that has it's corresponding unique "ID" from the API we are fetching and retrieving our data from. So when the method "toString" is called, it will return the formatted string
+of all the properties for all the individual creatures.
 
-
-#### Code-snippet (4):
+#### Code-snippet: MythicalCreatures class (4):
 ```
+package com.example.projekt;
 
+public class MythicalCreatures {
+    private String ID;
+    private String name;
+    ...
+
+    public MythicalCreatures(String ID, String name, String type, String company, String location, String category) {
+        this.ID = ID;
+        this.name = name;
+        ...
+    }
+
+    @Override
+    public String toString() {
+        String presentCreatures = "Creature: " + ID + "\nName: " + name + "\nElement: " + company + "\nPower: " + location + "\nCategory: " + category + "\nCreater: " + type;
+        return presentCreatures;
+    }
+}
 ```
 
 ### 5: Creating MyViewHolder:
 
+To create the class "MyViewHolder", i first started with making a new class, that extends the RecyclerView.ViewHolder.
+Inside this class we have a textView variable with the name "name". This variable is later used in a method called "MyViewHolder", here it's used to find the TextView with the ID "name".
+This TextView is what's earlier described as a Item inside our recyclerView, so what this class does is that it recycling and reusing Items / views as item
+for every "new item" inside our recyclerView.
 
-
-#### Code-snippet (5):
+#### Code-snippet: MyViewHolder (5):
 ```
+public class MyViewHolder extends RecyclerView.ViewHolder {
+    public TextView name;
+
+    public MyViewHolder(@NonNull View itemView) {
+        super(itemView);
+        name = itemView.findViewById(R.id.name);
+    }
+}
 
 ```
 
 ### 6: Creating MyAdapter:
 
+What this class does is that it works like a bridge / adapter between the data im retrieving (list of MythicalCreatures) and the RecyclerView. It is basically a class that takes in parameters to connect 
+the data to where it's supposed to be represented, in this case, the data from the API which is found inside my list of MythicalCreatures, and then displays this inside my RecyclerView as individual items.
 
+    6.1: When the class first "starts" it takes a parameter "RecyclerView.Adapter<MyViewHolder>", this will be the data that we want to display inside our RecyclerView.
+    6.2: Inside the "onCreateViewHolder()"-method, the code inflates the layout of "activity_second" and return a MyViewHolder object, which in our case can be described as
+         a method thats inflating the TextView from activity_second with a instance of MyViewHolder, which is what we are using to display every Item from our API seperatly.
+    6.3: Inside the "onBindViewHolder" method, we are binding the data for each Item inside the RecyclerView. Which also means that the data thats inflated in the latest step (6.2),
+         now is getting overridden to display the corresponding data inside the TextView, which is later placed inside the RecyclerView as an item, following the formatted string we created earlier
+         with the "toString" method.
+    6.4: Lastely we have the method "getItemCount()" which is used to return how many Items that exists inside the list of creatures, so with that said, this method is whats used to determine the size of our RecyclerView.
 
-#### Code-snippet (6):
+Overall, all these methods focuses on different parts of the code, to handle the retrieved data to then apply and present the retentive data for the users. The method which has been explained
+focuses on different key-points to make this hole process possible, and together does what the classname suggest, which is working as a adapter / bridge between the retrieving of the data, and the presenting of the data.
+
+#### Code-snippet: MyAdapter (6):
 ```
+public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private List<MythicalCreatures> listOfCreatures;
+    public MyAdapter(List<MythicalCreatures> listOfCreatures) {
+        this.listOfCreatures = listOfCreatures;
+    }
 
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_second, parent, false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.name.setText(listOfCreatures.get(position).toString());
+    }
+
+    @Override
+    public int getItemCount() {
+        return listOfCreatures.size();
+    }
+}
 ```
 
 ### 7: Creating my Intent:
 
 
 
-#### Code-snippet (7):
+#### Code-snippet: Creating the Intent (7):
 ```
-
+public void goToAboutPage(View view) {
+    Intent intent = new Intent(this, AboutActivity.class);
+    startActivity(intent);
+}
 ```
 
 ### 8: Fetching and presenting the API-data:
 
 
 
-#### Code-snippet (8):
+#### Code-snippet:  (8):
 ```
 
 ```
